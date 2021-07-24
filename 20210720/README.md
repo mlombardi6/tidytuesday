@@ -1,4 +1,8 @@
 
+
+https://user-images.githubusercontent.com/10838448/126868527-6aaa7435-6c7e-41ae-8d84-c7eee20b4d06.mp4
+
+
 # Introduction
 
 When I first saw [TidyTuesday's](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-07-20/readme.md) US droughts dataset I automatically (and quite predictably?) thought of ways to represent this spatially. News outlets such as the [New York Times](https://www.nytimes.com/interactive/2021/06/11/climate/california-western-drought-map.html) and the [CNN](https://www.cnn.com/2021/06/17/weather/west-california-drought-maps/index.html) had already covered this abundantly in June with a selection of heatmaps and choropleth maps. 
@@ -39,7 +43,6 @@ To add some fun I used `av_renderer()` which allows to combine your animation wi
 
 Enjoy. 
 
-![Video Description](https://github.com/mlombardi6/tidytuesday/blob/main/20210720/drought_ym.mp4)
 
 
 
