@@ -30,11 +30,7 @@ To do this I relied on some functionalities of the [gganimate package](https://g
 | D4 |	exceptional drought | 
 
 
-To add some fun I used `av_renderer()` which allows to combine your animation with an audio track. My choice was 'Rain' (The Beatles). Because the track is about 2 minutes and 55 seconds long (175 seconds) I needed a certain number of frames to make the video fit with the audio. After some tweaking I found that 15 frames per seconds was a balanced choice to preserve fluidity and speed of the transition states. Therefore
-
-$$
-\text{nframes} = 15 \text{fps} \times 177 s
-$$
+To add some fun I used `av_renderer()` which allows to combine your animation with an audio track. My choice was 'Rain' (The Beatles). Because the track is about 2 minutes and 55 seconds long (175 seconds) I needed a certain number of frames to make the video fit with the audio. After some tweaking I found that 15 frames per seconds was a balanced choice to preserve fluidity and speed of the transition states. Therefore `nframes = 15 fps x 177 s`.
 
 Enjoy. 
 
