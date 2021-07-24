@@ -3,7 +3,7 @@
 
 When I first saw [TidyTuesday's](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-07-20/readme.md) US droughts dataset I automatically (and quite predictably?) thought of ways to represent this spatially. News outlets such as the [New York Times](https://www.nytimes.com/interactive/2021/06/11/climate/california-western-drought-map.html) and the [CNN](https://www.cnn.com/2021/06/17/weather/west-california-drought-maps/index.html) had already covered this abundantly in June with a selection of heatmaps and choropleth maps. 
 
-A way to add some flavour would be to incorporate an animation to represent the flow of time, as drought phases come and go. One way to approach this would have been through spatial data points and density maps (but in tidytuesday's dataset areal data are provided), or adding further inputs, like @katie_press showed [here](https://twitter.com/katie_press/status/1417574749442564102). 
+A way to add some flavour would be to incorporate an animation to represent the flow of time, as drought phases come and go. One way to approach this would have been through spatial data points and density maps (but in this dataset areal data are provided), or adding further inputs like @katie_press showed in this nice piece of work [here](https://twitter.com/katie_press/status/1417574749442564102).
 
 Of course the data collection is organised in week frames and this adds to the temptation of creating an animation to represent the flow of time anyway.
 

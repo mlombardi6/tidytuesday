@@ -66,6 +66,7 @@ dt_drought<- dt_drought[, drought_desc := factor(drought_lvl,
                                                           "exceptional drought")) ]
 ```
 
+\ 
 ```{r droughts_data}
 kable(head(dt_drought, 12),
       format = "html",
