@@ -39,6 +39,7 @@ To add some fun I used `av_renderer()` which allows to combine your animation wi
 
 Enjoy. 
 
+![Video Description](https://github.com/mlombardi6/tidytuesday/blob/main/20210720/drought_ym.mp4)
 
 
 
