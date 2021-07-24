@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Marco Lombardi" />
+
+<meta name="date" content="2021-07-24" />
+
+<title>TidyTuesday, week 30</title>
+
+<script src="usDroughts_files/header-attrs-2.9/header-attrs.js"></script>
+<script src="usDroughts_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="usDroughts_files/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="usDroughts_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="usDroughts_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="usDroughts_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="usDroughts_files/navigation-1.1/tabsets.js"></script>
+<link href="usDroughts_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="usDroughts_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="usDroughts_files/kePrint-0.0.1/kePrint.js"></script>
+<link href="usDroughts_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">TidyTuesday, week 30</h1>
+<h4 class="author">Marco Lombardi</h4>
+<h4 class="date">2021-07-24</h4>
+
+</div>
+
+
+<p> </p>
+<div id="us-droughts-data" class="section level1">
+<h1>US Droughts Data</h1>
+<p> </p>
+<p><strong>TidyTuesday Link</strong></p>
+<p><a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-07-20/readme.md" class="uri">https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-07-20/readme.md</a></p>
+<p> </p>
+<p><strong>Data</strong></p>
+<p>2001-2021 US droughts data from the Drought Monitor.</p>
+<pre><code>The U.S. Drought Monitor is jointly produced by the National Drought Mitigation Center at the University of Nebraska-Lincoln, the United States Department of Agriculture, and the National Oceanic and Atmospheric Administration. Map courtesy of NDMC.</code></pre>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+drought levels
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+levels
+</th>
+<th style="text-align:left;">
+labels
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:left;">
+no drought
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D0
+</td>
+<td style="text-align:left;">
+abnormally dry
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D1
+</td>
+<td style="text-align:left;">
+moderate drought
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D2
+</td>
+<td style="text-align:left;">
+severe drought
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D3
+</td>
+<td style="text-align:left;">
+extreme drought
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D4
+</td>
+<td style="text-align:left;">
+exceptional drought
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+</div>
+<div id="droughts-cycles" class="section level1">
+<h1>Droughts cycles</h1>
+<p>Dry and wet cycles are dependent on geography and climate drivers. Drought phases in the US can be explained by changes in the track of extratropical cyclones, which can occur during climate cycles such as the El Niño-Southern Oscillation, or ENSO, as well as the North Atlantic Oscillation, Pacific Decadal Oscillation, and Atlantic multidecadal oscillation. The country’s contiguous western and especially southwestern region has experienced widespread drought since about year 2000 (<a href="https://en.wikipedia.org/wiki/Droughts_in_the_United_States" class="uri">https://en.wikipedia.org/wiki/Droughts_in_the_United_States</a>).</p>
+<p><img src="figures/EDA1-1.png" width="900" /></p>
+<p><img src="figures/EDA2-1.png" width="900" /></p>
+<p> </p>
+</div>
+<div id="population-affected-by-extreme-drought-or-exceptional-drought" class="section level1">
+<h1>Population affected by “extreme drought” or “exceptional drought”</h1>
+<p> </p>
+<pre><code>## NULL</code></pre>
+<pre><code>## 
+Rendering [-------------------------------------------------------------------] at 3.3 fps ~ eta:  5m
+Rendering [-------------------------------------------------------------------] at 3.2 fps ~ eta:  5m
+Rendering [-------------------------------------------------------------------] at 3.1 fps ~ eta:  5m
+Rendering [&gt;------------------------------------------------------------------] at 3.1 fps ~ eta:  5m
+Rendering [&gt;------------------------------------------------------------------] at 2.9 fps ~ eta:  6m
+Rendering [&gt;--------------------------------------------------------------------] at 3 fps ~ eta:  6m
+Rendering [&gt;--------------------------------------------------------------------] at 3 fps ~ eta:  5m
+Rendering [=&gt;-------------------------------------------------------------------] at 3 fps ~ eta:  5m
+Rendering [==&gt;------------------------------------------------------------------] at 3 fps ~ eta:  5m
+Rendering [===&gt;-----------------------------------------------------------------] at 3 fps ~ eta:  5m
+Rendering [===&gt;---------------------------------------------------------------] at 2.9 fps ~ eta:  5m
+Rendering [====&gt;--------------------------------------------------------------] at 2.9 fps ~ eta:  5m
+Rendering [=====&gt;-------------------------------------------------------------] at 2.9 fps ~ eta:  5m
+Rendering [======&gt;------------------------------------------------------------] at 2.9 fps ~ eta:  5m
+Rendering [=======&gt;-----------------------------------------------------------] at 2.9 fps ~ eta:  5m
+Rendering [========&gt;----------------------------------------------------------] at 2.9 fps ~ eta:  5m
+Rendering [=========&gt;---------------------------------------------------------] at 2.9 fps ~ eta:  5m
+Rendering [==========&gt;--------------------------------------------------------] at 2.9 fps ~ eta:  5m
+Rendering [===========&gt;-------------------------------------------------------] at 2.9 fps ~ eta:  5m
+Rendering [============&gt;------------------------------------------------------] at 2.9 fps ~ eta:  5m
+Rendering [=============&gt;-----------------------------------------------------] at 2.9 fps ~ eta:  5m
+Rendering [=============&gt;-----------------------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [==============&gt;----------------------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [===============&gt;---------------------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [================&gt;--------------------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [=================&gt;-------------------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [==================&gt;------------------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [===================&gt;-----------------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [====================&gt;----------------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [=====================&gt;---------------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [======================&gt;--------------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [=======================&gt;-------------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [========================&gt;------------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [=========================&gt;-----------------------------------------] at 2.9 fps ~ eta:  4m
+Rendering [=========================&gt;-----------------------------------------] at 2.9 fps ~ eta:  3m
+Rendering [==========================&gt;----------------------------------------] at 2.9 fps ~ eta:  3m
+Rendering [===========================&gt;---------------------------------------] at 2.9 fps ~ eta:  3m
+Rendering [============================&gt;--------------------------------------] at 2.9 fps ~ eta:  3m
+Rendering [=============================&gt;-------------------------------------] at 2.9 fps ~ eta:  3m
+Rendering [==============================&gt;------------------------------------] at 2.9 fps ~ eta:  3m
+Rendering [===============================&gt;-----------------------------------] at 2.9 fps ~ eta:  3m
+Rendering [================================&gt;----------------------------------] at 2.9 fps ~ eta:  3m
+Rendering [=================================&gt;---------------------------------] at 2.9 fps ~ eta:  3m
+Rendering [==================================&gt;--------------------------------] at 2.9 fps ~ eta:  3m
+Rendering [===================================&gt;-------------------------------] at 2.9 fps ~ eta:  3m
+Rendering [====================================&gt;------------------------------] at 2.9 fps ~ eta:  3m
+Rendering [=====================================&gt;-----------------------------] at 2.9 fps ~ eta:  3m
+Rendering [=====================================&gt;-----------------------------] at 2.9 fps ~ eta:  2m
+Rendering [======================================&gt;----------------------------] at 2.9 fps ~ eta:  2m
+Rendering [=======================================&gt;---------------------------] at 2.9 fps ~ eta:  2m
+Rendering [========================================&gt;--------------------------] at 2.9 fps ~ eta:  2m
+Rendering [=========================================&gt;-------------------------] at 2.9 fps ~ eta:  2m
+Rendering [==========================================&gt;------------------------] at 2.9 fps ~ eta:  2m
+Rendering [===========================================&gt;-----------------------] at 2.9 fps ~ eta:  2m
+Rendering [============================================&gt;----------------------] at 2.9 fps ~ eta:  2m
+Rendering [=============================================&gt;---------------------] at 2.9 fps ~ eta:  2m
+Rendering [==============================================&gt;--------------------] at 2.9 fps ~ eta:  2m
+Rendering [===============================================&gt;-------------------] at 2.9 fps ~ eta:  2m
+Rendering [================================================&gt;------------------] at 2.9 fps ~ eta:  2m
+Rendering [=================================================&gt;-----------------] at 2.9 fps ~ eta:  2m
+Rendering [=================================================&gt;-----------------] at 2.9 fps ~ eta:  1m
+Rendering [==================================================&gt;----------------] at 2.9 fps ~ eta:  1m
+Rendering [===================================================&gt;---------------] at 2.9 fps ~ eta:  1m
+Rendering [====================================================&gt;--------------] at 2.9 fps ~ eta:  1m
+Rendering [=====================================================&gt;-------------] at 2.9 fps ~ eta:  1m
+Rendering [======================================================&gt;------------] at 2.9 fps ~ eta:  1m
+Rendering [=======================================================&gt;-----------] at 2.9 fps ~ eta:  1m
+Rendering [========================================================&gt;----------] at 2.9 fps ~ eta:  1m
+Rendering [========================================================&gt;----------] at 2.9 fps ~ eta: 50s
+Rendering [========================================================&gt;----------] at 2.9 fps ~ eta: 49s
+Rendering [=========================================================&gt;---------] at 2.9 fps ~ eta: 49s
+Rendering [=========================================================&gt;---------] at 2.9 fps ~ eta: 48s
+Rendering [=========================================================&gt;---------] at 2.9 fps ~ eta: 47s
+Rendering [=========================================================&gt;---------] at 2.9 fps ~ eta: 46s
+Rendering [=========================================================&gt;---------] at 2.9 fps ~ eta: 45s
+Rendering [=========================================================&gt;---------] at 2.9 fps ~ eta: 44s
+Rendering [==========================================================&gt;--------] at 2.9 fps ~ eta: 44s
+Rendering [==========================================================&gt;--------] at 2.9 fps ~ eta: 43s
+Rendering [==========================================================&gt;--------] at 2.9 fps ~ eta: 42s
+Rendering [==========================================================&gt;--------] at 2.9 fps ~ eta: 41s
+Rendering [==========================================================&gt;--------] at 2.9 fps ~ eta: 40s
+Rendering [==========================================================&gt;--------] at 2.9 fps ~ eta: 39s
+Rendering [===========================================================&gt;-------] at 2.9 fps ~ eta: 39s
+Rendering [===========================================================&gt;-------] at 2.9 fps ~ eta: 38s
+Rendering [===========================================================&gt;-------] at 2.9 fps ~ eta: 37s
+Rendering [===========================================================&gt;-------] at 2.9 fps ~ eta: 36s
+Rendering [===========================================================&gt;-------] at 2.9 fps ~ eta: 35s
+Rendering [===========================================================&gt;-------] at 2.9 fps ~ eta: 34s
+Rendering [============================================================&gt;------] at 2.9 fps ~ eta: 34s
+Rendering [============================================================&gt;------] at 2.9 fps ~ eta: 33s
+Rendering [============================================================&gt;------] at 2.9 fps ~ eta: 32s
+Rendering [============================================================&gt;------] at 2.9 fps ~ eta: 31s
+Rendering [============================================================&gt;------] at 2.9 fps ~ eta: 30s
+Rendering [============================================================&gt;------] at 2.9 fps ~ eta: 29s
+Rendering [=============================================================&gt;-----] at 2.9 fps ~ eta: 29s
+Rendering [=============================================================&gt;-----] at 2.9 fps ~ eta: 28s
+Rendering [=============================================================&gt;-----] at 2.9 fps ~ eta: 27s
+Rendering [=============================================================&gt;-----] at 2.9 fps ~ eta: 26s
+Rendering [=============================================================&gt;-----] at 2.9 fps ~ eta: 25s
+Rendering [=============================================================&gt;-----] at 2.9 fps ~ eta: 24s
+Rendering [==============================================================&gt;----] at 2.9 fps ~ eta: 23s
+Rendering [==============================================================&gt;----] at 2.9 fps ~ eta: 22s
+Rendering [==============================================================&gt;----] at 2.9 fps ~ eta: 21s
+Rendering [==============================================================&gt;----] at 2.9 fps ~ eta: 20s
+Rendering [==============================================================&gt;----] at 2.9 fps ~ eta: 19s
+Rendering [==============================================================&gt;----] at 2.9 fps ~ eta: 18s
+Rendering [===============================================================&gt;---] at 2.9 fps ~ eta: 18s
+Rendering [===============================================================&gt;---] at 2.9 fps ~ eta: 17s
+Rendering [===============================================================&gt;---] at 2.9 fps ~ eta: 16s
+Rendering [===============================================================&gt;---] at 2.9 fps ~ eta: 15s
+Rendering [===============================================================&gt;---] at 2.9 fps ~ eta: 14s
+Rendering [===============================================================&gt;---] at 2.9 fps ~ eta: 13s
+Rendering [================================================================&gt;--] at 2.9 fps ~ eta: 13s
+Rendering [================================================================&gt;--] at 2.9 fps ~ eta: 12s
+Rendering [================================================================&gt;--] at 2.9 fps ~ eta: 11s
+Rendering [================================================================&gt;--] at 2.9 fps ~ eta: 10s
+Rendering [================================================================&gt;--] at 2.9 fps ~ eta:  9s
+Rendering [================================================================&gt;--] at 2.9 fps ~ eta:  8s
+Rendering [=================================================================&gt;-] at 2.9 fps ~ eta:  8s
+Rendering [=================================================================&gt;-] at 2.9 fps ~ eta:  7s
+Rendering [=================================================================&gt;-] at 2.9 fps ~ eta:  6s
+Rendering [=================================================================&gt;-] at 2.9 fps ~ eta:  5s
+Rendering [=================================================================&gt;-] at 2.9 fps ~ eta:  4s
+Rendering [=================================================================&gt;-] at 2.9 fps ~ eta:  3s
+Rendering [==================================================================&gt;] at 2.9 fps ~ eta:  2s
+Rendering [==================================================================&gt;] at 2.9 fps ~ eta:  1s
+Rendering [==================================================================&gt;] at 2.9 fps ~ eta:  0s
+Rendering [===================================================================] at 2.9 fps ~ eta:  0s
+                                                                                                     </code></pre>
+<p><img src="figures/unnamed-chunk-1-1.gif" /><!-- --></p>
+<pre><code>## 
+Rendering [-------------------------------------------------------------------] at 2.6 fps ~ eta: 13m
+Rendering [-------------------------------------------------------------------] at 2.8 fps ~ eta: 12m
+Rendering [-------------------------------------------------------------------] at 2.7 fps ~ eta: 12m
+Rendering [-------------------------------------------------------------------] at 2.8 fps ~ eta: 12m
+Rendering [-------------------------------------------------------------------] at 2.9 fps ~ eta: 12m
+Rendering [-------------------------------------------------------------------] at 2.8 fps ~ eta: 12m
+Rendering [&gt;------------------------------------------------------------------] at 2.8 fps ~ eta: 12m
+Rendering [&gt;------------------------------------------------------------------] at 2.9 fps ~ eta: 12m
+Rendering [&gt;------------------------------------------------------------------] at 2.8 fps ~ eta: 12m
+Rendering [&gt;------------------------------------------------------------------] at 2.9 fps ~ eta: 12m
+Rendering [&gt;------------------------------------------------------------------] at 2.9 fps ~ eta: 11m
+Rendering [&gt;------------------------------------------------------------------] at 2.8 fps ~ eta: 12m
+Rendering [&gt;------------------------------------------------------------------] at 2.8 fps ~ eta: 11m
+Rendering [=&gt;-----------------------------------------------------------------] at 2.8 fps ~ eta: 12m
+Rendering [=&gt;-----------------------------------------------------------------] at 2.8 fps ~ eta: 11m
+Rendering [=&gt;-----------------------------------------------------------------] at 2.8 fps ~ eta: 12m
+Rendering [=&gt;-----------------------------------------------------------------] at 2.8 fps ~ eta: 11m
+Rendering [=&gt;-----------------------------------------------------------------] at 2.8 fps ~ eta: 12m
+Rendering [=&gt;-----------------------------------------------------------------] at 2.8 fps ~ eta: 11m
+Rendering [=&gt;-----------------------------------------------------------------] at 2.8 fps ~ eta: 12m
+Rendering [=&gt;-----------------------------------------------------------------] at 2.8 fps ~ eta: 11m
+Rendering [==&gt;----------------------------------------------------------------] at 2.8 fps ~ eta: 11m
+Rendering [===&gt;---------------------------------------------------------------] at 2.8 fps ~ eta: 11m
+Rendering [===&gt;---------------------------------------------------------------] at 2.7 fps ~ eta: 11m
+Rendering [====&gt;--------------------------------------------------------------] at 2.8 fps ~ eta: 11m
+Rendering [====&gt;--------------------------------------------------------------] at 2.7 fps ~ eta: 11m
+Rendering [=====&gt;-------------------------------------------------------------] at 2.7 fps ~ eta: 11m
+Rendering [======&gt;------------------------------------------------------------] at 2.7 fps ~ eta: 11m
+Rendering [=======&gt;-----------------------------------------------------------] at 2.7 fps ~ eta: 11m
+Rendering [========&gt;----------------------------------------------------------] at 2.7 fps ~ eta: 11m
+Rendering [========&gt;----------------------------------------------------------] at 2.6 fps ~ eta: 11m
+Rendering [=========&gt;---------------------------------------------------------] at 2.6 fps ~ eta: 11m
+Rendering [==========&gt;--------------------------------------------------------] at 2.6 fps ~ eta: 11m
+Rendering [===========&gt;-------------------------------------------------------] at 2.6 fps ~ eta: 11m
+Rendering [============&gt;------------------------------------------------------] at 2.6 fps ~ eta: 11m
+Rendering [============&gt;------------------------------------------------------] at 2.5 fps ~ eta: 11m
+Rendering [============&gt;------------------------------------------------------] at 2.5 fps ~ eta: 10m
+Rendering [=============&gt;-----------------------------------------------------] at 2.5 fps ~ eta: 10m
+Rendering [==============&gt;----------------------------------------------------] at 2.5 fps ~ eta: 10m
+Rendering [===============&gt;---------------------------------------------------] at 2.5 fps ~ eta: 10m
+Rendering [================&gt;--------------------------------------------------] at 2.5 fps ~ eta: 10m
+Rendering [=================&gt;-------------------------------------------------] at 2.5 fps ~ eta: 10m
+Rendering [==================&gt;------------------------------------------------] at 2.5 fps ~ eta: 10m
+Rendering [==================&gt;------------------------------------------------] at 2.5 fps ~ eta:  9m
+Rendering [===================&gt;-----------------------------------------------] at 2.5 fps ~ eta:  9m
+Rendering [====================&gt;----------------------------------------------] at 2.5 fps ~ eta:  9m
+Rendering [====================&gt;----------------------------------------------] at 2.4 fps ~ eta:  9m
+Rendering [=====================&gt;---------------------------------------------] at 2.4 fps ~ eta:  9m
+Rendering [======================&gt;--------------------------------------------] at 2.4 fps ~ eta:  9m
+Rendering [=======================&gt;-------------------------------------------] at 2.4 fps ~ eta:  9m
+Rendering [========================&gt;------------------------------------------] at 2.4 fps ~ eta:  9m
+Rendering [=========================&gt;-----------------------------------------] at 2.4 fps ~ eta:  9m
+Rendering [=========================&gt;-----------------------------------------] at 2.4 fps ~ eta:  8m
+Rendering [==========================&gt;----------------------------------------] at 2.4 fps ~ eta:  8m
+Rendering [===========================&gt;---------------------------------------] at 2.4 fps ~ eta:  8m
+Rendering [===========================&gt;---------------------------------------] at 2.3 fps ~ eta:  8m
+Rendering [============================&gt;--------------------------------------] at 2.3 fps ~ eta:  8m
+Rendering [=============================&gt;-------------------------------------] at 2.3 fps ~ eta:  8m
+Rendering [==============================&gt;------------------------------------] at 2.3 fps ~ eta:  8m
+Rendering [===============================&gt;-----------------------------------] at 2.3 fps ~ eta:  8m
+Rendering [===============================&gt;-----------------------------------] at 2.3 fps ~ eta:  7m
+Rendering [================================&gt;----------------------------------] at 2.3 fps ~ eta:  7m
+Rendering [=================================&gt;---------------------------------] at 2.3 fps ~ eta:  7m
+Rendering [==================================&gt;--------------------------------] at 2.3 fps ~ eta:  7m
+Rendering [===================================&gt;-------------------------------] at 2.3 fps ~ eta:  7m
+Rendering [====================================&gt;------------------------------] at 2.3 fps ~ eta:  7m
+Rendering [====================================&gt;------------------------------] at 2.3 fps ~ eta:  6m
+Rendering [=====================================&gt;-----------------------------] at 2.3 fps ~ eta:  6m
+Rendering [======================================&gt;----------------------------] at 2.3 fps ~ eta:  6m
+Rendering [=======================================&gt;---------------------------] at 2.3 fps ~ eta:  6m
+Rendering [========================================&gt;--------------------------] at 2.3 fps ~ eta:  6m
+Rendering [=========================================&gt;-------------------------] at 2.3 fps ~ eta:  6m
+Rendering [=========================================&gt;-------------------------] at 2.3 fps ~ eta:  5m
+Rendering [==========================================&gt;------------------------] at 2.3 fps ~ eta:  5m
+Rendering [===========================================&gt;-----------------------] at 2.3 fps ~ eta:  5m
+Rendering [============================================&gt;----------------------] at 2.3 fps ~ eta:  5m
+Rendering [=============================================&gt;---------------------] at 2.3 fps ~ eta:  5m
+Rendering [=============================================&gt;---------------------] at 2.3 fps ~ eta:  4m
+Rendering [==============================================&gt;--------------------] at 2.3 fps ~ eta:  4m
+Rendering [===============================================&gt;-------------------] at 2.3 fps ~ eta:  4m
+Rendering [================================================&gt;------------------] at 2.3 fps ~ eta:  4m
+Rendering [=================================================&gt;-----------------] at 2.3 fps ~ eta:  4m
+Rendering [==================================================&gt;----------------] at 2.3 fps ~ eta:  4m
+Rendering [==================================================&gt;----------------] at 2.3 fps ~ eta:  3m
+Rendering [===================================================&gt;---------------] at 2.3 fps ~ eta:  3m
+Rendering [====================================================&gt;--------------] at 2.3 fps ~ eta:  3m
+Rendering [=====================================================&gt;-------------] at 2.3 fps ~ eta:  3m
+Rendering [======================================================&gt;------------] at 2.3 fps ~ eta:  3m
+Rendering [=======================================================&gt;-----------] at 2.3 fps ~ eta:  3m
+Rendering [=======================================================&gt;-----------] at 2.3 fps ~ eta:  2m
+Rendering [========================================================&gt;----------] at 2.3 fps ~ eta:  2m
+Rendering [=========================================================&gt;---------] at 2.3 fps ~ eta:  2m
+Rendering [==========================================================&gt;--------] at 2.3 fps ~ eta:  2m
+Rendering [===========================================================&gt;-------] at 2.3 fps ~ eta:  2m
+Rendering [===========================================================&gt;-------] at 2.2 fps ~ eta:  2m
+Rendering [===========================================================&gt;-------] at 2.2 fps ~ eta:  1m
+Rendering [============================================================&gt;------] at 2.2 fps ~ eta:  1m
+Rendering [=============================================================&gt;-----] at 2.2 fps ~ eta:  1m
+Rendering [==============================================================&gt;----] at 2.2 fps ~ eta:  1m
+Rendering [==============================================================&gt;----] at 2.2 fps ~ eta: 50s
+Rendering [==============================================================&gt;----] at 2.2 fps ~ eta: 49s
+Rendering [==============================================================&gt;----] at 2.2 fps ~ eta: 48s
+Rendering [==============================================================&gt;----] at 2.2 fps ~ eta: 47s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 47s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 46s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 45s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 44s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 43s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 42s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 41s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 40s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 39s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 38s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 37s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 36s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 35s
+Rendering [===============================================================&gt;---] at 2.2 fps ~ eta: 34s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 33s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 32s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 31s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 30s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 29s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 28s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 27s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 26s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 25s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 24s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 23s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 22s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 21s
+Rendering [================================================================&gt;--] at 2.2 fps ~ eta: 20s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta: 20s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta: 19s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta: 18s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta: 17s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta: 16s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta: 15s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta: 14s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta: 13s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta: 12s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta: 11s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta: 10s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta:  9s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta:  8s
+Rendering [=================================================================&gt;-] at 2.2 fps ~ eta:  7s
+Rendering [==================================================================&gt;] at 2.2 fps ~ eta:  6s
+Rendering [==================================================================&gt;] at 2.2 fps ~ eta:  5s
+Rendering [==================================================================&gt;] at 2.2 fps ~ eta:  4s
+Rendering [==================================================================&gt;] at 2.2 fps ~ eta:  3s
+Rendering [==================================================================&gt;] at 2.2 fps ~ eta:  2s
+Rendering [==================================================================&gt;] at 2.2 fps ~ eta:  1s
+Rendering [==================================================================&gt;] at 2.2 fps ~ eta:  0s
+Rendering [===================================================================] at 2.2 fps ~ eta:  0s
+                                                                                                     </code></pre>
+<p><img src="figures/unnamed-chunk-2-1.gif" /><!-- --><img src="figures/unnamed-chunk-2-2.png" width="900" /></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
