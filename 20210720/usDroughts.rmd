@@ -12,16 +12,15 @@ output:
 
 \ 
 
-# US Droughts Data
-
-Dry and wet cycles are dependent on a number of factors including geography, topology and climate drivers. Drought phases in the US can be explained by changes in the track of extratropical cyclones, which can occur during climate cycles such as the El Niño-Southern Oscillation, or ENSO, as well as the North Atlantic Oscillation, Pacific Decadal Oscillation, and Atlantic multidecadal oscillation. The country's contiguous western and especially southwestern region has experienced widespread drought since about year 2000 (https://en.wikipedia.org/wiki/Droughts_in_the_United_States).
-
-
-\ 
-
 **TidyTuesday Link**
 
 https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-07-20/readme.md
+
+\ 
+
+**Droughts_in_the_United_States**
+
+Dry and wet cycles are dependent on a number of factors including geography, topology and climate drivers. Drought phases in the US can be explained by changes in the track of extratropical cyclones, which can occur during climate cycles such as the El Niño-Southern Oscillation, or ENSO, as well as the North Atlantic Oscillation, Pacific Decadal Oscillation, and Atlantic multidecadal oscillation. The country's contiguous western and especially southwestern region has experienced widespread drought since about year 2000 (https://en.wikipedia.org/wiki/Droughts_in_the_United_States).
 
 \ 
 
@@ -67,12 +66,18 @@ dt_drought<- dt_drought[, drought_desc := factor(drought_lvl,
 ```
 
 \ 
+
+**Data sample**
+
 ```{r droughts_data}
 kable(head(dt_drought, 12),
-      format = "html",
-      caption= "droughts data") %>%
+      format = "html") %>%
   kable_styling(bootstrap_options = "striped", position = "center")
 ```
+
+\ 
+
+**Drought levels**
 
 ```{r droughts_levels}
 data.table(levels = c("None", "D0", "D1", "D2", "D3", "D4"), 
@@ -82,8 +87,7 @@ data.table(levels = c("None", "D0", "D1", "D2", "D3", "D4"),
                       "severe drought", 
                       "extreme drought",
                       "exceptional drought")) %>%
-  kable(format = "html",
-        caption= "drought levels") %>%
+  kable(format = "html") %>%
   kable_styling(bootstrap_options = "striped", position = "center")
 ```
 
@@ -96,8 +100,7 @@ dt_ym<- dt_drought[, .(sum_area_pct = round(sum(area_pct),6)/uniqueN(map_date),
                         .(map_year= year(valid_start), 
                           map_month= month(valid_start), 
                           state_abb, 
-                          drought_lvl,
-                          drought_desc)]
+                          drought_lvl)]
 
 # states affected by extreme drought (D3) or exceptional drought (D4).
 dt_ym_D3 <- dt_ym[drought_lvl %in% c("D3","D4"), 
@@ -116,7 +119,7 @@ dt_ym_D3 <- dt_ym_D3[, map_ym := paste(
 
 \ 
 
-# Population affected by "extreme drought" or "exceptional drought"
+**States affected by "extreme drought" (D3) or "exceptional drought" (D4)**
 
 ```{r ym_animate}
 p <- 
@@ -134,7 +137,8 @@ dt_ym_D3[map_year %in% 2001:2021,] %>%
   scale_y_continuous(breaks= seq(0,1,.1), labels = scales::label_percent(accuracy = 1)) + 
   scale_fill_gradient(low = "#007852", high = "#fb0f03") + 
   theme_bw(base_size = 18) + 
-  scale_size(range = c(0,15)) 
+  scale_size(range = c(0,15)) +
+  labs(caption = "github.com/mlombardi6")
   
 anim <- p + 
   transition_states(map_ym, transition_length = 3, state_length = 0)  + 
@@ -146,14 +150,8 @@ anim <- p +
 ```
 
 
-```{r gif}
-animate(anim, nframes = 2655, fps = 15,  width = 1000, height = 562,
-        renderer = gifski_renderer("drought_ym.gif"))
-```
-
-
 ```{r mp4}
-animate(nframes = 2655, fps = 15,  width = 1000, height = 562,
+animate(nframes = 2625, fps = 15,  width = 1000, height = 562,
   anim + enter_fade() + exit_fly(y_loc = 1),
   renderer = av_renderer(file = "./drought_ym.mp4", 
                          audio="The Beatles - Rain.mp3")
