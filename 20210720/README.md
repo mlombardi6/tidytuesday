@@ -19,6 +19,7 @@ I was interested in a visualisation that could manifestly represent the cyclic n
 
 To do this I relied on some functionalities of the [gganimate package](https://github.com/thomasp85/gganimate) and a cumulative metric based on the proportion of area and population affected by a drought level of D3 severity or more.  
 
+
 | Drought Level | Label
 | :---: | :---: | 
 | None | no drought |
@@ -28,7 +29,6 @@ To do this I relied on some functionalities of the [gganimate package](https://g
 | D3 |	extreme drought |
 | D4 |	exceptional drought | 
 
-\ 
 
 To add some fun I used `av_renderer()` which allows to combine your animation with an audio track. My choice was 'Rain' (The Beatles). Because the track is about 2 minutes and 55 seconds long (175 seconds) I needed a certain number of frames to make the video fit with the audio. After some tweaking I found that 15 frames per seconds was a balanced choice to preserve fluidity and speed of the transition states. Therefore $nframes = 15 \text{fps} \times 177 seconds$.
 
