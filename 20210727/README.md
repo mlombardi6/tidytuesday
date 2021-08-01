@@ -8,6 +8,7 @@ The new olympic champion from yesterday is [Daniel Ståhl](https://en.wikipedia.
 
 ![](DanielStahl.png)
 
-\ 
+![](figures/athletics-1.png)
 
 Discus throw is one of the few modern disciplines who were part of the ancient [Olympic](https://en.wikipedia.org/wiki/Ancient_Olympic_Games) and [Panhellenic](https://en.wikipedia.org/wiki/Panhellenic_Games) games. Back then the anatomy of a discus thrower might have looked like the famous [Discobolus](https://en.wikipedia.org/wiki/Discobolus). The first modern Olympic champion in 1986 was Robert Garrett with 1.88mt and 81kg. By 1948 discus throwers medalists passed in average the 100kg mark and continue the upward trend until recent times.
+
